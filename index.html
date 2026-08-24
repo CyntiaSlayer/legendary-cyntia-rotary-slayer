@@ -1,599 +1,555 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SLAYER</title>
-  <style>
-    /* ===== 全局重置 & 千禧风格变量 ===== */
-    :root {
-      --bg: #0a0a0a;
-      --surface: #111111;
-      --surface-2: #1a1a1a;
-      --surface-3: #242424;
-      --border: #2e2e2e;
-      --border-bright: #3c3c3c;
-      --text-primary: #eaeaea;
-      --text-secondary: #9a9a9a;
-      --text-muted: #6b6b6b;
-      --accent-red: #e63946;
-      --accent-red-dark: #b12634;
-      --accent-red-glow: rgba(230, 57, 70, 0.25);
-      --pixel-border: 2px solid #000;
-      --shadow-red: 4px 4px 0 var(--accent-red-dark);
-      --shadow-black: 6px 6px 0 #000;
-      --font-pixel: 'Courier New', 'Lucida Console', Monaco, monospace;
-      --font-serif: 'Georgia', 'Times New Roman', serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyntia Slayer</title>
+    <style>
+        /* ============ 全局配色 ============ */
+        :root {
+            --bg: #1a1a1a;
+            --bg-card: #242424;
+            --bg-hover: #2e2e2e;
+            --border: #3a3a3a;
+            --text: #e0e0e0;
+            --text-dim: #888;
+            --accent: #ffffff;
+            --radius: 14px;
+            --transition: 0.3s ease;
+        }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      background-color: var(--bg);
-      background-image: 
-        radial-gradient(circle at 20% 20%, rgba(230, 57, 70, 0.03) 0%, transparent 30%),
-        radial-gradient(circle at 80% 80%, rgba(230, 57, 70, 0.03) 0%, transparent 30%),
-        repeating-linear-gradient(0deg, #0f0f0f 0px, #0f0f0f 2px, #0a0a0a 2px, #0a0a0a 4px);
-      color: var(--text-primary);
-      font-family: var(--font-pixel);
-      min-height: 100vh;
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow-x: hidden;
-    }
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
 
-    /* 扫描线效果 overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 2px, transparent 2px, transparent 4px);
-      pointer-events: none;
-      z-index: 999;
-      mix-blend-mode: multiply;
-    }
+        a {
+            color: var(--text);
+            text-decoration: none;
+        }
 
-    /* 主容器 —— 老式CRT显示器边框效果 */
-    .blog-container {
-      width: 100%;
-      max-width: 1000px;
-      background: var(--surface);
-      border: 3px solid #000;
-      box-shadow: 
-        0 0 0 2px var(--border),
-        0 0 0 5px #000,
-        var(--shadow-black),
-        0 20px 40px rgba(0,0,0,0.8);
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      margin: 30px auto;
-      image-rendering: pixelated;
-    }
+        /* ============ 导航 ============ */
+        nav {
+            background: rgba(26, 26, 26, 0.92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-    /* 装饰性铆钉/螺丝 */
-    .blog-container::before {
-      content: '';
-      position: absolute;
-      top: -8px; left: -8px;
-      width: 16px; height: 16px;
-      background: var(--surface-3);
-      border: 2px solid #000;
-      border-radius: 50%;
-      box-shadow: 
-        0 0 0 2px var(--border),
-        inset 0 0 0 2px #000;
-      z-index: 5;
-    }
-    .blog-container::after {
-      content: '';
-      position: absolute;
-      bottom: -8px; right: -8px;
-      width: 16px; height: 16px;
-      background: var(--surface-3);
-      border: 2px solid #000;
-      border-radius: 50%;
-      box-shadow: 
-        0 0 0 2px var(--border),
-        inset 0 0 0 2px #000;
-      z-index: 5;
-    }
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    /* 内部红黑装饰条 */
-    .inner-border {
-      border: 2px solid var(--accent-red-dark);
-      padding: 6px;
-      background: var(--bg);
-      box-shadow: inset 0 0 15px rgba(230, 57, 70, 0.15);
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: var(--accent);
+        }
 
-    /* ===== 顶栏 ===== */
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 18px;
-      background: var(--surface-2);
-      border-bottom: 2px solid var(--border-bright);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-weight: bold;
-      color: var(--text-secondary);
-      position: relative;
-    }
+        .nav-links {
+            display: flex;
+            gap: 5px;
+            list-style: none;
+        }
 
-    .header .title {
-      font-size: 1.3rem;
-      color: var(--accent-red);
-      text-shadow: 2px 2px 0 #000, 0 0 8px var(--accent-red-glow);
-      letter-spacing: 4px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+        .nav-links a {
+            padding: 7px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            transition: all var(--transition);
+            letter-spacing: 1px;
+        }
 
-    .header .title span {
-      background: var(--accent-red);
-      color: #000;
-      padding: 3px 8px;
-      font-size: 0.7rem;
-      border: 2px solid #000;
-      box-shadow: 2px 2px 0 #000;
-      letter-spacing: 1px;
-    }
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+            background: var(--bg-card);
+        }
 
-    .header .status {
-      display: flex;
-      gap: 12px;
-      font-size: 0.75rem;
-    }
+        /* ============ 主容器 ============ */
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
 
-    .header .status .dot {
-      width: 10px;
-      height: 10px;
-      background: var(--accent-red);
-      border-radius: 50%;
-      display: inline-block;
-      margin-right: 4px;
-      box-shadow: 0 0 8px var(--accent-red);
-      animation: blink 1.5s infinite;
-    }
+        /* ============ 主页 ============ */
+        #home .hero {
+            text-align: center;
+            padding: 60px 30px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--bg-card);
+            margin-bottom: 40px;
+        }
 
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
+        .hero-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: #2a2a2a;
+            border: 2px solid #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 18px;
+        }
 
-    /* ===== 导航栏 ===== */
-    .nav {
-      display: flex;
-      background: var(--surface-3);
-      border-bottom: 2px solid var(--accent-red-dark);
-      padding: 0 10px;
-      flex-wrap: wrap;
-    }
+        #home .hero h1 {
+            font-size: 2rem;
+            letter-spacing: 5px;
+            margin-bottom: 8px;
+        }
 
-    .nav a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      padding: 10px 18px;
-      font-size: 0.8rem;
-      letter-spacing: 1px;
-      border-right: 1px solid var(--border);
-      transition: all 0.1s ease;
-      text-transform: uppercase;
-      position: relative;
-    }
+        #home .hero .subtitle {
+            color: var(--text-dim);
+            letter-spacing: 3px;
+            font-size: 0.85rem;
+            margin-bottom: 18px;
+        }
 
-    .nav a:hover {
-      background: var(--accent-red);
-      color: #000;
-      text-shadow: none;
-      font-weight: bold;
-      box-shadow: inset 0 -2px 0 #000;
-      cursor: pointer;
-    }
+        #home .hero .divider {
+            width: 50px;
+            height: 1px;
+            background: #555;
+            margin: 0 auto 18px;
+        }
 
-    .nav a.active {
-      color: var(--accent-red);
-      border-bottom: 2px solid var(--accent-red);
-      font-weight: bold;
-    }
+        #home .hero .intro {
+            max-width: 400px;
+            margin: 0 auto 25px;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
 
-    /* ===== 主要内容区 ===== */
-    .main-content {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      padding: 25px 20px;
-      flex: 1;
-    }
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
 
-    /* 文章列表 */
-    .post-list {
-      flex: 2;
-      min-width: 280px;
-    }
+        .hero-btns a {
+            padding: 10px 24px;
+            border: 1px solid #444;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            transition: all var(--transition);
+        }
 
-    .post-item {
-      background: var(--surface-2);
-      border: 2px solid var(--border);
-      margin-bottom: 25px;
-      box-shadow: 4px 4px 0 #000;
-      transition: transform 0.1s ease, box-shadow 0.1s ease;
-      position: relative;
-      overflow: hidden;
-    }
+        .hero-btns a:hover {
+            border-color: #fff;
+            background: #fff;
+            color: #1a1a1a;
+        }
 
-    .post-item:hover {
-      transform: translate(-2px, -2px);
-      box-shadow: 6px 6px 0 var(--accent-red-dark);
-      border-color: var(--accent-red);
-    }
+        /* ============ 分栏 ============ */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
 
-    .post-item::after {
-      content: '';
-      position: absolute;
-      top: 0; right: 0;
-      width: 15px; height: 15px;
-      background: var(--accent-red);
-      clip-path: polygon(100% 0, 0 0, 100% 100%);
-      opacity: 0.6;
-    }
+        @media (max-width: 768px) {
+            .two-columns {
+                grid-template-columns: 1fr;
+            }
+        }
 
-    .post-header {
-      padding: 14px 18px;
-      border-bottom: 1px dashed var(--border-bright);
-      background: #141414;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
+        .column {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+        }
 
-    .post-title {
-      font-size: 1.4rem;
-      font-family: var(--font-serif);
-      color: var(--text-primary);
-      letter-spacing: 1px;
-      text-shadow: 2px 2px 0 #000;
-      font-weight: bold;
-    }
+        .column h2 {
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
 
-    .post-date {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      background: #000;
-      padding: 4px 8px;
-      border: 1px solid var(--border);
-      letter-spacing: 1px;
-    }
+        /* ============ 发布表单 ============ */
+        .publish-form {
+            margin-bottom: 20px;
+        }
 
-    .post-excerpt {
-      padding: 18px;
-      font-size: 0.85rem;
-      line-height: 1.7;
-      color: var(--text-secondary);
-      background: #0e0e0e;
-      border-bottom: 1px solid var(--border);
-    }
+        .publish-form input,
+        .publish-form textarea {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 15px;
+            color: var(--text);
+            font-size: 0.88rem;
+            font-family: inherit;
+            transition: border-color var(--transition);
+            outline: none;
+            resize: vertical;
+        }
 
-    .post-tags {
-      padding: 10px 18px;
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      background: #111;
-    }
+        .publish-form input:focus,
+        .publish-form textarea:focus {
+            border-color: #666;
+        }
 
-    .tag {
-      font-size: 0.65rem;
-      background: #000;
-      color: var(--accent-red);
-      border: 1px solid var(--accent-red-dark);
-      padding: 4px 8px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      box-shadow: 1px 1px 0 #000;
-    }
+        .publish-form input::placeholder,
+        .publish-form textarea::placeholder {
+            color: #555;
+        }
 
-    .read-more {
-      margin-left: auto;
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      text-decoration: none;
-      background: #1a1a1a;
-      padding: 4px 10px;
-      border: 1px solid var(--border);
-      transition: 0.1s;
-    }
-    .read-more:hover {
-      background: var(--accent-red);
-      color: #000;
-      border-color: var(--accent-red-dark);
-    }
+        .publish-form input {
+            margin-bottom: 10px;
+        }
 
-    /* 侧边栏 */
-    .sidebar {
-      flex: 1;
-      min-width: 200px;
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-    }
+        .publish-form textarea {
+            min-height: 80px;
+            margin-bottom: 10px;
+        }
 
-    .sidebar-box {
-      background: var(--surface-2);
-      border: 2px solid var(--border);
-      box-shadow: 3px 3px 0 #000;
-      padding: 15px;
-    }
+        .publish-btn {
+            width: 100%;
+            padding: 11px;
+            background: transparent;
+            border: 1px solid #555;
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
 
-    .sidebar-box h3 {
-      font-size: 0.9rem;
-      color: var(--accent-red);
-      border-bottom: 2px solid var(--accent-red-dark);
-      padding-bottom: 8px;
-      margin-bottom: 12px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      text-shadow: 1px 1px 0 #000;
-    }
+        .publish-btn:hover {
+            background: #fff;
+            color: #1a1a1a;
+            border-color: #fff;
+        }
 
-    .sidebar-box p, .sidebar-box li {
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
+        .publish-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
 
-    .sidebar-box ul {
-      list-style: none;
-      padding-left: 0;
-    }
-    .sidebar-box li {
-      padding: 6px 0;
-      border-bottom: 1px dashed #2a2a2a;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .sidebar-box li::before {
-      content: '◆';
-      color: var(--accent-red);
-      font-size: 0.6rem;
-      text-shadow: 0 0 5px var(--accent-red);
-    }
+        /* ============ 内容列表 ============ */
+        .post-list {
+            flex: 1;
+            overflow-y: auto;
+        }
 
-    .counter {
-      display: flex;
-      justify-content: center;
-      gap: 5px;
-      margin: 10px 0;
-    }
-    .counter span {
-      background: #000;
-      border: 1px solid var(--border);
-      color: var(--accent-red);
-      padding: 5px 8px;
-      font-weight: bold;
-      font-size: 1rem;
-      letter-spacing: 2px;
-      text-shadow: 0 0 3px var(--accent-red);
-      box-shadow: inset 0 0 5px #000;
-    }
+        .post-list:empty::after {
+            content: '还没有内容';
+            display: block;
+            text-align: center;
+            color: #555;
+            font-size: 0.8rem;
+            padding: 30px 0;
+            letter-spacing: 1px;
+        }
 
-    /* ===== 页脚 ===== */
-    .footer {
-      border-top: 2px solid var(--border-bright);
-      padding: 15px 20px;
-      background: var(--surface-2);
-      font-size: 0.65rem;
-      text-align: center;
-      color: var(--text-muted);
-      letter-spacing: 2px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .footer .red-heart {
-      color: var(--accent-red);
-      font-size: 0.8rem;
-      animation: pulse 1.2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.3); }
-    }
+        .post-item {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 15px 18px;
+            margin-bottom: 10px;
+            transition: all var(--transition);
+        }
 
-    /* 装饰性滚动条 (webKit) */
-    ::-webkit-scrollbar {
-      width: 10px;
-      background: #0a0a0a;
-    }
-    ::-webkit-scrollbar-track {
-      border: 1px solid #2e2e2e;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: var(--accent-red-dark);
-      border: 1px solid #000;
-      box-shadow: inset 0 0 5px #000;
-    }
+        .post-item:hover {
+            border-color: #555;
+        }
 
-    /* 响应式 */
-    @media (max-width: 700px) {
-      .main-content {
-        flex-direction: column;
-      }
-      .nav a {
-        flex: 1;
-        text-align: center;
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-      }
-    }
-  </style>
+        .post-item .post-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--accent);
+        }
+
+        .post-item .post-date {
+            font-size: 0.7rem;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        .post-item .post-body {
+            font-size: 0.82rem;
+            color: var(--text-dim);
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .loading-text {
+            text-align: center;
+            color: #555;
+            font-size: 0.8rem;
+            padding: 20px 0;
+            letter-spacing: 1px;
+        }
+
+        /* ============ 页脚 ============ */
+        footer {
+            text-align: center;
+            padding: 35px 20px;
+            color: #555;
+            font-size: 0.78rem;
+            letter-spacing: 2px;
+            border-top: 1px solid var(--border);
+            margin-top: 50px;
+        }
+
+        footer a {
+            color: #888;
+            transition: color var(--transition);
+        }
+
+        footer a:hover {
+            color: #fff;
+        }
+
+        /* ============ 滚动条 ============ */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #444;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #666;
+        }
+    </style>
 </head>
 <body>
-  <div class="blog-container">
-    <div class="inner-border">
-      
-      <!-- 顶栏：像老式论坛的状态栏 -->
-      <header class="header">
-        <div class="title">
-          ☠️ 垃圾堆 <span>v2.0</span>
-        </div>
-        <div class="status">
-          <span><span class="dot"></span>ONLINE</span>
-          <span>// 2003 REBOOT</span>
-        </div>
-      </header>
 
-      <!-- 导航栏 -->
-      <nav class="nav">
-        <a href="#" class="active">首页</a>
-        <a href="#">博客</a>
-        <a href="#">相册</a>
-        <a href="#">留言板</a>
-        <a href="#">链接</a>
-        <a href="#">关于我</a>
-      </nav>
-
-      <!-- 主内容区 -->
-      <div class="main-content">
-        <!-- 左侧文章列表 -->
-        <div class="post-list">
-          <!-- 文章 1 -->
-          <article class="post-item">
-            <div class="post-header">
-              <span class="post-title">操蛋人生</span>
-              <span class="post-date">2024.08.24</span>
-            </div>
-            <div class="post-excerpt">
-              <p>我要睡觉了</p>
-            </div>
-            <div class="post-tags">
-              <span class="tag">#法</span>
-              <span class="tag">#古典爱情</span>
-              <span class="tag">#像素</span>
-              <a href="#" class="read-more">阅读全文 »</a>
-            </div>
-          </article>
-
-          <!-- 文章 2 -->
-          <article class="post-item">
-            <div class="post-header">
-              <span class="post-title">滨寿司好好吃</span>
-              <span class="post-date">2024.08.17</span>
-            </div>
-            <div class="post-excerpt">
-              <p>吃吃滨寿司</p>
-            </div>
-            <div class="post-tags">
-              <span class="tag">#大叔吃寿司</span>
-              <span class="tag">#哭泣的鳗鱼</span>
-              <span class="tag">#搞搞小坤翅</span>
-              <a href="#" class="read-more">阅读全文 »</a>
-            </div>
-          </article>
-
-          <!-- 文章 3 -->
-          <article class="post-item">
-            <div class="post-header">
-              <span class="post-title">画不完了</span>
-              <span class="post-date">2024.08.10</span>
-            </div>
-            <div class="post-excerpt">
-              <p>画不完了</p>
-            </div>
-            <div class="post-tags">
-              <span class="tag">#画不完了</span>
-              <span class="tag">#画不完了</span>
-              <span class="tag">#画不完了</span>
-              <a href="#" class="read-more">画不完了 »</a>
-            </div>
-          </article>
-        </div>
-
-        <!-- 侧边栏 -->
-        <aside class="sidebar">
-          <!-- 关于板块 -->
-          <div class="sidebar-box">
-            <h3>🕸️ 妈妈生的</h3>
-            <p>哎。</p>
-            <div class="counter">
-              <span>0</span><span>0</span><span>3</span><span>9</span><span>7</span><span>2</span>
-            </div>
-            <p style="text-align:center; color:var(--text-muted);">访问计数器</p>
-          </div>
-
-          <!-- 最新留言 / 动态 -->
-          <div class="sidebar-box">
-            <h3>💬 最新涂鸦</h3>
-            <ul>
-              <li>Evil_Lurker: 爷青回！</li>
-              <li>肉肉: 求模板下载！</li>
-              <li>暗物质: 死去的回忆攻击我</li>
-              <li>幽灵: 太对味了</li>
+    <!-- ============ 导航 ============ -->
+    <nav>
+        <div class="nav-container">
+            <a href="#home" class="logo">CYN</a>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">主页</a></li>
+                <li><a href="#chaos">又喝多了</a></li>
+                <li><a href="#works">拉拉大便</a></li>
             </ul>
-          </div>
+        </div>
+    </nav>
 
-          <!-- 友情链接 -->
-          <div class="sidebar-box">
-            <h3>🔗 友链</h3>
-            <ul>
-              <li>操蛋人生</li>
-              <li>拉拉大便</li>
-              <li>又喝多了</li>
-              <li>随便玩吧</li>
-            </ul>
-          </div>
+    <!-- ============ 主内容 ============ -->
+    <main>
 
-          <!-- 一个诡异的文本框 -->
-          <div class="sidebar-box" style="background:#0d0d0d; border-color:#3c3c3c;">
-            <h3 style="color:var(--accent-red);">又困了</h3>
-            <p style="font-size:0.7rem; color:#999;">头疼。<br>我睡觉。</p>
-          </div>
-        </aside>
-      </div>
+        <!-- ===== 主页 ===== -->
+        <section id="home">
+            <div class="hero">
+                <div class="hero-avatar">🖤</div>
+                <h1>CYN TIA</h1>
+                <p class="subtitle"> · SLAYER · </p>
+                <div class="divider"></div>
+                <p class="intro">
+                    今宵酒醒何处？杨柳岸、晓风残月。
+                </p>
+                <div class="hero-btns">
+                    <a href="#chaos">又喝多了 →</a>
+                    <a href="#works">拉拉大便 →</a>
+                    <a href="https://github.com/CyntiaSlayer" target="_blank">GitHub ↗</a>
+                </div>
+            </div>
+        </section>
 
-      <!-- 页脚 -->
-      <footer class="footer">
-        <span>© 2</span>
-        <span>「 」<span class="red-heart">❤</span> 「」</span>
-        <span>Made with </span>
-      </footer>
+        <!-- ===== 分栏 ===== -->
+        <div class="two-columns">
 
-    </div><!-- end inner-border -->
-  </div><!-- end blog-container -->
+            <!-- 左栏：又喝多了 -->
+            <section id="chaos" class="column">
+                <h2>又喝多了</h2>
 
-  <!-- 一个极小的装饰性script：可选的动态时钟，突出古早感 -->
-  <script>
-    (function() {
-      // 简单的时钟显示在顶栏状态上，模仿老式系统时间
-      const statusSpan = document.querySelector('.header .status span:last-child');
-      if (statusSpan) {
-        function updateTime() {
-          const now = new Date();
-          const timeStr = now.toLocaleTimeString('zh-CN', { hour12: false });
-          statusSpan.innerHTML = `// ${timeStr}`;
+                <div class="publish-form">
+                    <input type="text" id="chaos-title" placeholder="标题...">
+                    <textarea id="chaos-content" placeholder="写点什么..."></textarea>
+                    <button class="publish-btn" id="chaos-btn" onclick="publishPost('chaos')">发 布</button>
+                </div>
+
+                <div class="post-list" id="chaos-list"></div>
+            </section>
+
+            <!-- 右栏：拉拉大便 -->
+            <section id="works" class="column">
+                <h2>拉拉大便</h2>
+
+                <div class="publish-form">
+                    <input type="text" id="works-title" placeholder="作品名称...">
+                    <textarea id="works-content" placeholder="作品描述..."></textarea>
+                    <button class="publish-btn" id="works-btn" onclick="publishPost('works')">发 布</button>
+                </div>
+
+                <div class="post-list" id="works-list"></div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <!-- ============ 页脚 ============ -->
+    <footer>
+        <p>© 2024 Cyntia Slayer · Powered by <a href="https://pages.github.com" target="_blank">GitHub Pages</a></p>
+    </footer>
+
+    <!-- ============ JavaScript ============ -->
+    <script>
+        // ============================================
+        // ⚠️ 改这里：你的 GitHub 用户名和仓库名
+        // ============================================
+        const GITHUB_USERNAME = 'CyntiaSlayer';
+        const GITHUB_REPO = 'legendary-cyntia-rotary-slayer';
+        
+        // ============================================
+        // ⚠️ 改这里：你的 GitHub Token（从第1步获取）
+        // ============================================
+        const GITHUB_TOKEN = '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';
+
+        const API_BASE = `https://api.github.com/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/issues`;
+
+        // 发布内容
+        async function publishPost(section) {
+            const titleInput = document.getElementById(section + '-title');
+            const contentInput = document.getElementById(section + '-content');
+            const btn = document.getElementById(section + '-btn');
+            
+            const title = titleInput.value.trim();
+            const content = contentInput.value.trim();
+
+            if (!title || !content) {
+                alert('标题和内容都不能为空哦');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = '发布中...';
+
+            try {
+                const response = await fetch(API_BASE, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `token ${GITHUB_TOKEN}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        title: `[${section}] ${title}`,
+                        body: content,
+                        labels: [section]
+                    })
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.message || '发布失败');
+                }
+
+                titleInput.value = '';
+                contentInput.value = '';
+                loadPosts(section);
+            } catch (error) {
+                console.error('发布失败:', error);
+                alert('发布失败：' + error.message);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '发 布';
+            }
         }
-        updateTime();
-        setInterval(updateTime, 1000);
-      }
-    })();
-  </script>
+
+        // 加载内容
+        async function loadPosts(section) {
+            const listEl = document.getElementById(section + '-list');
+            listEl.innerHTML = '<div class="loading-text">加载中...</div>';
+
+            try {
+                const response = await fetch(
+                    `${API_BASE}?labels=${section}&state=open&per_page=50&sort=created&direction=desc`,
+                    {
+                        headers: {
+                            'Accept': 'application/vnd.github.v3+json'
+                        }
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error('加载失败，状态码 ' + response.status);
+                }
+
+                const issues = await response.json();
+                listEl.innerHTML = '';
+
+                if (issues.length === 0) {
+                    return;
+                }
+
+                issues.forEach((issue) => {
+                    const item = document.createElement('div');
+                    item.className = 'post-item';
+                    
+                    const date = new Date(issue.created_at);
+                    const dateStr = date.getFullYear() + '.' + 
+                                   String(date.getMonth() + 1).padStart(2, '0') + '.' + 
+                                   String(date.getDate()).padStart(2, '0') + ' ' +
+                                   String(date.getHours()).padStart(2, '0') + ':' +
+                                   String(date.getMinutes()).padStart(2, '0');
+                    
+                    // 去掉标题里的 [section] 前缀
+                    const cleanTitle = issue.title.replace(/^\[.*?\]\s*/, '');
+                    
+                    item.innerHTML = `
+                        <div class="post-title">${escapeHtml(cleanTitle)}</div>
+                        <div class="post-date">${dateStr}</div>
+                        <div class="post-body">${escapeHtml(issue.body)}</div>
+                    `;
+                    listEl.appendChild(item);
+                });
+            } catch (error) {
+                console.error('加载失败:', error);
+                listEl.innerHTML = '<div class="loading-text">加载失败，请刷新重试</div>';
+            }
+        }
+
+        // 防 XSS
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // 初始化
+        loadPosts('chaos');
+        loadPosts('works');
+    </script>
+
 </body>
 </html>
