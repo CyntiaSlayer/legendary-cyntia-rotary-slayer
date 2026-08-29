@@ -3,12 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>🥀 欢 迎 来 到 废 墟</title>
-    
-    <!-- 像素字体 -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    
     <style>
-        /* ========== 全局重置 ========== */
         * {
             margin: 0;
             padding: 0;
@@ -23,36 +19,33 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 30px;
+            padding: 20px;
             background-image: 
                 url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");
         }
 
-        /* ========== 主容器 ———— 更大了 ========== */
         .container {
-            max-width: 1300px;      /* 原来 1100px */
+            max-width: 1600px;
             width: 100%;
             background: #13101a;
-            border: 4px solid #2a2438;  /* 边框粗了一点 */
-            padding: 35px;          /* 原来 20px */
+            border: 3px solid #2a2438;
+            padding: 40px;
             box-shadow: 
-                0 0 80px rgba(80, 50, 120, 0.08),
-                inset 0 0 100px rgba(30, 20, 50, 0.3),
-                8px 8px 0 #0a0810,
-                -8px -8px 0 #0a0810;
+                0 0 60px rgba(80, 50, 120, 0.08),
+                inset 0 0 80px rgba(30, 20, 50, 0.3),
+                6px 6px 0 #0a0810,
+                -6px -6px 0 #0a0810;
             display: flex;
-            gap: 30px;             /* 原来 20px */
+            gap: 40px;
             flex-wrap: wrap;
             transform: rotate(-0.2deg);
-            transition: all 0.3s ease;
         }
 
-        /* ========== 左侧栏 ========== */
         .sidebar {
-            flex: 1.2;             /* 原来 1，稍微宽一点 */
-            min-width: 240px;       /* 原来 200px */
+            flex: 1;
+            min-width: 320px;
             background: #100e17;
-            padding: 30px 24px;     /* 原来 22px 18px */
+            padding: 35px 28px;
             border: 2px solid #2a2438;
             box-shadow: 
                 inset 0 0 50px rgba(40, 30, 60, 0.2),
@@ -65,76 +58,70 @@
         .sidebar::before {
             content: "🥀";
             position: absolute;
-            top: -16px;
-            left: -12px;
-            font-size: 28px;
+            top: -12px;
+            left: -8px;
+            font-size: 22px;
             opacity: 0.4;
             transform: rotate(-15deg);
         }
         .sidebar::after {
             content: "🥀";
             position: absolute;
-            bottom: -16px;
-            right: -12px;
-            font-size: 24px;
+            bottom: -12px;
+            right: -8px;
+            font-size: 18px;
             opacity: 0.3;
             transform: rotate(25deg);
         }
 
-        /* ===== 头像 ===== */
         .avatar {
-            width: 150px;           /* 原来 120px */
-            height: 150px;
-            margin: 0 auto 20px;    /* 原来 15px */
-            border: 4px solid #3a2f4a;  /* 边框粗一点 */
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+            border: 3px solid #3a2f4a;
             background: #0d0b12;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 80px;        /* 原来 60px */
+            font-size: 100px;
             box-shadow: 
-                0 0 50px rgba(60, 40, 100, 0.1),
-                inset 0 0 60px rgba(30, 20, 50, 0.2);
+                0 0 40px rgba(60, 40, 100, 0.1),
+                inset 0 0 50px rgba(30, 20, 50, 0.2);
             image-rendering: pixelated;
             filter: grayscale(0.3);
             transition: all 0.5s ease;
         }
         .avatar:hover {
             filter: grayscale(0);
-            box-shadow: 0 0 80px rgba(80, 50, 130, 0.15);
+            box-shadow: 0 0 60px rgba(80, 50, 130, 0.15);
         }
 
-        /* ===== 文字稍微放大 ===== */
         .sidebar h2 {
-            font-size: 15px;        /* 原来 12px */
-            color: #b0a0c0;
-            text-shadow: 0 0 30px rgba(120, 80, 180, 0.15);
-            letter-spacing: 4px;    /* 原来 3px */
-            margin-top: 8px;
+            font-size: 28px;
+            color: #6a5a7a;
+            text-shadow: 0 0 20px rgba(80, 50, 120, 0.1);
+            letter-spacing: 0px;
+            margin-top: 5px;
             border-bottom: 2px solid #1a1622;
-            padding-bottom: 14px;
+            padding-bottom: 16px;
             word-break: break-word;
             font-weight: normal;
         }
 
         .sidebar p {
-            font-size: 11px;        /* 原来 9px */
-            color: #9a8aaa;
-            line-height: 2.4;       /* 原来 2.2 */
-            margin-top: 16px;       /* 原来 12px */
+            font-size: 20px;
+            color: #4a3a52;
+            line-height: 2.2;
+            margin-top: 16px;
             background: rgba(20, 16, 30, 0.6);
-            padding: 18px 16px;     /* 原来 14px 12px */
+            padding: 18px 16px;
             border: 1px solid #1a1622;
-            letter-spacing: 0.5px;
-        }
-
-        .sidebar p span {
-            color: #b0a0c0;
+            letter-spacing: 0px;
         }
 
         .blink {
             animation: blink 1.2s step-end infinite;
-            color: #a080b0;
+            color: #6a4a7a;
         }
         @keyframes blink {
             50% { opacity: 0.15; }
@@ -148,12 +135,11 @@
             50% { transform: translateY(2px); }
         }
 
-        /* ========== 右侧主内容 ========== */
         .main {
-            flex: 2.5;             /* 原来 2，稍微宽一点 */
-            min-width: 280px;       /* 原来 240px */
+            flex: 2;
+            min-width: 360px;
             background: #110f18;
-            padding: 32px 28px;     /* 原来 25px 22px */
+            padding: 38px 32px;
             border: 2px solid #2a2438;
             box-shadow: inset 0 0 60px rgba(30, 20, 50, 0.15);
             transform: rotate(-0.1deg);
@@ -161,38 +147,37 @@
         }
 
         .main h1 {
-            font-size: 17px;        /* 原来 14px */
-            color: #b0a0c0;
+            font-size: 30px;
+            color: #5a4a6a;
             text-align: center;
             text-transform: uppercase;
-            letter-spacing: 5px;    /* 原来 4px */
+            letter-spacing: 0px;
             border-bottom: 2px solid #1a1622;
-            padding-bottom: 18px;   /* 原来 14px */
-            margin-bottom: 28px;    /* 原来 22px */
-            text-shadow: 0 0 40px rgba(120, 80, 180, 0.08);
+            padding-bottom: 18px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 30px rgba(60, 40, 100, 0.05);
             word-break: break-word;
             font-weight: normal;
         }
 
-        /* ===== 链接 ===== */
         .link-grid {
             display: flex;
             flex-direction: column;
-            gap: 18px;             /* 原来 14px */
+            gap: 18px;
         }
 
         .link-item {
             display: block;
             background: #12101a;
-            padding: 22px 28px;     /* 原来 16px 20px */
+            padding: 28px 30px;
             border: 2px solid #1f1a2a;
-            color: #b0a0b8;
+            color: #5a4a62;
             text-decoration: none;
-            font-size: 16px;        /* 原来 13px */
+            font-size: 28px;
             text-transform: uppercase;
-            letter-spacing: 4px;    /* 原来 3px */
+            letter-spacing: 0px;
             box-shadow: 
-                4px 4px 0 #0a0810,  /* 原来 3px */
+                3px 3px 0 #0a0810,
                 inset 0 0 30px rgba(30, 20, 50, 0.05);
             transition: all 0.15s ease;
             text-align: center;
@@ -200,92 +185,83 @@
             position: relative;
         }
 
-        .link-item:nth-child(1) { 
-            background: #15101e; 
-            border-color: #2a1f35;
-        }
-        .link-item:nth-child(2) { 
-            background: #120f1a; 
-            border-color: #1f1a2a;
-        }
-        .link-item:nth-child(3) { 
-            background: #18121f; 
-            border-color: #2a2038;
-        }
+        .link-item:nth-child(1) { background: #15101e; border-color: #2a1f35; }
+        .link-item:nth-child(2) { background: #120f1a; border-color: #1f1a2a; }
+        .link-item:nth-child(3) { background: #18121f; border-color: #2a2038; }
 
         .link-item:hover {
             transform: translate(2px, 2px);
-            box-shadow: 0 0 50px rgba(100, 70, 150, 0.1);
+            box-shadow: 0 0 40px rgba(60, 40, 100, 0.06);
             background: #1a1622;
-            color: #d0c0e0;
-            border-color: #4a3a5a;
+            color: #7a6a8a;
+            border-color: #3a2f4a;
         }
 
         .link-item::before {
             content: "✧ ";
-            font-size: 16px;        /* 原来 14px */
-            color: #4a3a5a;
-            margin-right: 12px;     /* 原来 10px */
-            opacity: 0.6;
+            font-size: 30px;
+            color: #2a2438;
+            margin-right: 6px;
+            opacity: 0.5;
         }
         .link-item::after {
             content: " ✧";
-            font-size: 16px;
-            color: #4a3a5a;
-            margin-left: 12px;
-            opacity: 0.6;
+            font-size: 30px;
+            color: #2a2438;
+            margin-left: 6px;
+            opacity: 0.5;
         }
+        .link-item:nth-child(2)::before { content: "░ "; }
+        .link-item:nth-child(2)::after { content: " ░"; }
+        .link-item:nth-child(3)::before { content: "❍ "; }
+        .link-item:nth-child(3)::after { content: " ❍"; }
 
-        .link-item:nth-child(2)::before {
-            content: "░ ";
-        }
-        .link-item:nth-child(2)::after {
-            content: " ░";
-        }
-
-        .link-item:nth-child(3)::before {
-            content: "❍ ";
-        }
-        .link-item:nth-child(3)::after {
-            content: " ❍";
-        }
-
-        /* ========== 页脚 ========== */
         .footer {
             width: 100%;
-            margin-top: 22px;       /* 原来 16px */
+            margin-top: 20px;
             text-align: center;
-            font-size: 10px;        /* 原来 8px */
-            color: #5a4a6a;
+            font-size: 20px;
+            color: #2a2438;
             border-top: 2px solid #1a1622;
-            padding-top: 18px;      /* 原来 14px */
-            letter-spacing: 3px;    /* 原来 2px */
+            padding-top: 18px;
+            letter-spacing: 0px;
             transform: rotate(-0.2deg);
         }
-
         .footer .blink {
-            color: #8a7a9a;
+            color: #4a3a52;
         }
 
-        /* 计数器 */
+        .sidebar p:last-of-type {
+            margin-top: 16px;
+            font-size: 18px;
+            background: #0d0b12;
+            border: 1px solid #1a1622;
+            color: #3a2f4a;
+            letter-spacing: 0px;
+        }
+        .sidebar p:last-of-type span {
+            font-size: 20px;
+            color: #4a3a52;
+            letter-spacing: 0px;
+        }
         .sidebar div[style] {
-            color: #5a4a6a !important;
-            font-size: 9px !important;   /* 原来 7px */
+            margin-top: 16px;
+            font-size: 16px;
+            color: #1f1a2a;
+            border-top: 1px solid #1a1622;
+            padding-top: 14px;
+            letter-spacing: 0px;
         }
+
         .main div[style] {
-            color: #5a4a6a !important;
-            font-size: 9px !important;
+            margin-top: 26px;
+            font-size: 16px;
+            color: #1f1a2a;
+            border-top: 1px solid #1a1622;
+            padding-top: 14px;
+            letter-spacing: 0px;
         }
 
-        /* 简介里的小字 */
-        .sidebar p[style] {
-            font-size: 10px !important;   /* 原来 8px */
-        }
-        .sidebar p[style] span {
-            font-size: 12px !important;   /* 原来 10px */
-        }
-
-        /* ========== 响应式 ========== */
         @media (max-width: 700px) {
             .container {
                 flex-direction: column;
@@ -295,19 +271,15 @@
                 transform: none;
             }
             .link-item {
-                font-size: 13px;
-                padding: 16px 14px;
+                font-size: 22px;
+                padding: 20px 18px;
+                letter-spacing: 0px;
             }
             .link-item::before, .link-item::after {
                 display: none;
             }
             .sidebar::before, .sidebar::after {
                 display: none;
-            }
-            .avatar {
-                width: 120px;
-                height: 120px;
-                font-size: 60px;
             }
         }
     </style>
@@ -316,7 +288,6 @@
 
 <div class="container">
 
-    <!-- ===== 左侧：头像 + 简介 ===== -->
     <div class="sidebar">
         <div class="avatar">😶</div>
         <h2 class="tired">✧ 废 物 点 心 ✧</h2>
@@ -324,18 +295,17 @@
             <span class="blink">✧</span> 活着 但没什么意思 <span class="blink">✧</span><br>
             专业发呆 业余呼吸<br>
             喜欢灰色、下雨天、凌晨三点<br>
-            <span style="color: #8a7a9a;">❍</span> 2000 - ？ <span style="color: #8a7a9a;">❍</span>
+            <span style="color: #3a2f4a;">❍</span> 2000 - ？ <span style="color: #3a2f4a;">❍</span>
         </p>
-        <p style="margin-top: 16px; font-size: 10px; background: #0d0b12; border: 1px solid #1a1622; color: #7a6a8a;">
+        <p>
             🕸️  最 好 用<br>
-            <span style="font-size: 12px; color: #9a8aaa;">Internet Explorer 5</span>
+            <span>Internet Explorer 5</span>
         </p>
-        <div style="margin-top: 16px; font-size: 9px; color: #4a3a5a; border-top: 1px solid #1a1622; padding-top: 12px; letter-spacing: 1px;">
+        <div>
             <span class="blink">✧</span> 访客: 0000000 <span class="blink">✧</span>
         </div>
     </div>
 
-    <!-- ===== 右侧：链接 ===== -->
     <div class="main">
         <h1>⬛ 点 击 进 入 虚 无 ⬛</h1>
 
@@ -351,15 +321,14 @@
             </a>
         </div>
 
-        <div style="text-align: right; margin-top: 24px; font-size: 9px; color: #4a3a5a; border-top: 1px solid #1a1622; padding-top: 12px; letter-spacing: 1px;">
+        <div style="text-align: right; margin-top: 26px; font-size: 16px; color: #1f1a2a; border-top: 1px solid #1a1622; padding-top: 14px; letter-spacing: 0px;">
             <span class="blink">░</span> 已存活: 9000+ 天 <span class="blink">░</span>
         </div>
     </div>
 
-    <!-- ===== 页脚 ===== -->
     <div class="footer">
         <span class="blink">✧</span> 本 站 由 疲 惫 和 无 聊 驱 动  <span class="blink">✧</span><br>
-        <span style="font-size: 8px; color: #3a2a4a;">© 2026  Nothing Matters</span>
+        <span style="font-size: 16px; color: #1a1622;">© 2026  Nothing Matters</span>
     </div>
 
 </div>
