@@ -36,44 +36,66 @@
             pointer-events: none;
             z-index: 0;
             overflow: hidden;
+        }
+
+        .bg-left {
+            position: absolute;
+            left: 10px;
+            top: 0;
+            height: 100%;
             display: flex;
-            justify-content: space-evenly;
-            align-items: flex-start;
-            padding: 0 10px;
+            flex-direction: column;
+            justify-content: space-around;
+            gap: 40px;
+        }
+
+        .bg-right {
+            position: absolute;
+            right: 10px;
+            top: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            gap: 40px;
         }
 
         .bg-text span {
             writing-mode: vertical-rl;
-            font-size: 18px;
-            color: rgba(180, 50, 50, 0.25);
-            letter-spacing: 8px;
+            font-size: 16px;
+            color: #ff1a1a;
+            letter-spacing: 6px;
             white-space: nowrap;
-            animation: floatUp linear infinite;
             font-weight: 300;
             user-select: none;
-            flex-shrink: 0;
+            animation: floatStep linear infinite;
         }
 
-        .bg-text span:nth-child(1) { animation-duration: 14s; animation-delay: 0s; font-size: 20px; }
-        .bg-text span:nth-child(2) { animation-duration: 18s; animation-delay: 2s; font-size: 15px; }
-        .bg-text span:nth-child(3) { animation-duration: 12s; animation-delay: 4s; font-size: 18px; }
-        .bg-text span:nth-child(4) { animation-duration: 16s; animation-delay: 1s; font-size: 14px; }
-        .bg-text span:nth-child(5) { animation-duration: 13s; animation-delay: 3s; font-size: 22px; }
-        .bg-text span:nth-child(6) { animation-duration: 19s; animation-delay: 5s; font-size: 16px; }
-        .bg-text span:nth-child(7) { animation-duration: 15s; animation-delay: 0.5s; font-size: 18px; }
-        .bg-text span:nth-child(8) { animation-duration: 20s; animation-delay: 3.5s; font-size: 14px; }
-        .bg-text span:nth-child(9) { animation-duration: 11s; animation-delay: 2.5s; font-size: 19px; }
-        .bg-text span:nth-child(10) { animation-duration: 17s; animation-delay: 4.5s; font-size: 15px; }
-        .bg-text span:nth-child(11) { animation-duration: 14s; animation-delay: 1.5s; font-size: 21px; }
-        .bg-text span:nth-child(12) { animation-duration: 16s; animation-delay: 3s; font-size: 14px; }
-        .bg-text span:nth-child(13) { animation-duration: 12s; animation-delay: 2s; font-size: 18px; }
-        .bg-text span:nth-child(14) { animation-duration: 18s; animation-delay: 4s; font-size: 16px; }
+        .bg-left span:nth-child(1) { animation-duration: 6s; animation-delay: 0s; }
+        .bg-left span:nth-child(2) { animation-duration: 8s; animation-delay: 1.5s; font-size: 14px; }
+        .bg-left span:nth-child(3) { animation-duration: 7s; animation-delay: 3s; font-size: 18px; }
+        .bg-left span:nth-child(4) { animation-duration: 9s; animation-delay: 0.8s; font-size: 13px; }
+        .bg-left span:nth-child(5) { animation-duration: 6.5s; animation-delay: 2.2s; font-size: 17px; }
+        .bg-left span:nth-child(6) { animation-duration: 7.5s; animation-delay: 4s; font-size: 15px; }
+        .bg-left span:nth-child(7) { animation-duration: 8.5s; animation-delay: 1s; font-size: 19px; }
 
-        @keyframes floatUp {
-            0% { transform: translateY(100vh) rotate(-2deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) rotate(2deg); opacity: 0; }
+        .bg-right span:nth-child(1) { animation-duration: 7s; animation-delay: 0.5s; }
+        .bg-right span:nth-child(2) { animation-duration: 9s; animation-delay: 2s; font-size: 14px; }
+        .bg-right span:nth-child(3) { animation-duration: 6s; animation-delay: 3.5s; font-size: 18px; }
+        .bg-right span:nth-child(4) { animation-duration: 8s; animation-delay: 1.2s; font-size: 13px; }
+        .bg-right span:nth-child(5) { animation-duration: 7.5s; animation-delay: 2.8s; font-size: 17px; }
+        .bg-right span:nth-child(6) { animation-duration: 6.5s; animation-delay: 4.2s; font-size: 15px; }
+        .bg-right span:nth-child(7) { animation-duration: 9.5s; animation-delay: 0.3s; font-size: 20px; }
+
+        @keyframes floatStep {
+            0%   { transform: translateY(110vh) rotate(-1deg); opacity: 0; }
+            10%  { opacity: 0.9; }
+            20%  { transform: translateY(80vh) rotate(-1deg); }
+            40%  { transform: translateY(50vh) rotate(0deg); }
+            60%  { transform: translateY(30vh) rotate(1deg); }
+            80%  { transform: translateY(10vh) rotate(1deg); }
+            95%  { opacity: 0.9; }
+            100% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
         }
 
         .container {
@@ -238,6 +260,15 @@
             color: #6a3a3a;
         }
 
+        .empty-state {
+            color: #8a7a7a;
+            font-size: 20px;
+            line-height: 2.8;
+            letter-spacing: 4px;
+            font-weight: 300;
+            text-align: left;
+        }
+
         .footer {
             max-width: 1600px;
             width: 100%;
@@ -291,40 +322,49 @@
                 font-size: 15px;
                 padding: 8px 12px;
             }
+            .empty-state {
+                font-size: 16px;
+                line-height: 2.4;
+            }
+            .bg-text span {
+                font-size: 12px !important;
+                letter-spacing: 3px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== 背景飘浮的竖排诗句 ===== -->
     <div class="bg-text">
-        <span>诗 句 占 位</span>
-        <span>诗 句 占 位</span>
-        <span>诗 句 占 位</span>
-        <span>诗 句 占 位</span>
-        <span>诗 句 占 位</span>
-        <span>诗 句 占 位</span>
-        <span>诗 句 占 位</span>
-        <span>诗 句 占 位</span>
-        <span>诗 句 占 位</span>
-        <span>诗 句 占 位</span>
-        <span>诗 句 占 位</span>
-        <span>诗 句 占 位</span>
-        <span>诗 句 占 位</span>
-        <span>诗 句 占 位</span>
+        <div class="bg-left">
+            <span>酒 入 愁 肠</span>
+            <span>化 作 相 思 泪</span>
+            <span>醉 后 不 知 天 在 水</span>
+            <span>满 船 清 梦 压 星 河</span>
+            <span>举 杯 邀 明 月</span>
+            <span>对 影 成 三 人</span>
+            <span>人 生 得 意 须 尽 欢</span>
+        </div>
+        <div class="bg-right">
+            <span>莫 使 金 樽 空 对 月</span>
+            <span>醉 卧 沙 场 君 莫 笑</span>
+            <span>古 来 征 战 几 人 回</span>
+            <span>花 间 一 壶 酒</span>
+            <span>独 酌 无 相 亲</span>
+            <span>抽 刀 断 水 水 更 流</span>
+            <span>举 杯 消 愁 愁 更 愁</span>
+        </div>
     </div>
 
-    <!-- ===== 主容器 ===== -->
     <div class="container">
 
-        <!-- 左列 -->
         <div class="left-panel">
             <a href="../index.html" class="back-link">← 返 回</a>
             <div class="left-title">🍷 标 题 占 位</div>
             <div class="left-sub">— 副 标 题 占 位 —</div>
 
             <div class="poem-list" id="poemList">
-                <div class="poem-title active" data-index="0">▸ 标 题 占 位 1</div>
+                <div class="poem-title" data-index="0">▸ 标 题 占 位 1</div>
                 <div class="poem-title" data-index="1">▸ 标 题 占 位 2</div>
                 <div class="poem-title" data-index="2">▸ 标 题 占 位 3</div>
                 <div class="poem-title" data-index="3">▸ 标 题 占 位 4</div>
@@ -333,15 +373,12 @@
             </div>
         </div>
 
-        <!-- 右列 -->
         <div class="right-panel" id="rightPanel">
             <div class="poem-display" id="poemDisplay">
-                <div class="poem-title-large">诗 歌 标 题 占 位</div>
-                <div class="poem-body">
+                <div class="empty-state">
                     诗 歌 内 容 占 位 <br>
                     诗 歌 内 容 占 位 <br>
-                    诗 歌 内 容 占 位 <br>
-                    <span class="small">— 占 位 符 —</span>
+                    诗 歌 内 容 占 位
                 </div>
             </div>
         </div>
@@ -353,7 +390,6 @@
     </div>
 
     <script>
-        // ===== 占位符诗歌数据 =====
         const poems = [{
             title: '诗 歌 标 题 占 位 1',
             body: `诗 歌 内 容 占 位 \n诗 歌 内 容 占 位 \n诗 歌 内 容 占 位 \n<span class="small">— 占 位 符 —</span>`
