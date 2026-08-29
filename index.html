@@ -17,31 +17,31 @@
         }
 
         body {
-            background: #0d0b12; /* 深紫黑 */
+            background: #0d0b12;
             font-family: 'Press Start 2P', monospace;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 30px;
             background-image: 
                 url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");
         }
 
-        /* ========== 主容器 ========== */
+        /* ========== 主容器 ———— 更大了 ========== */
         .container {
-            max-width: 1100px;
+            max-width: 1300px;      /* 原来 1100px */
             width: 100%;
-            background: #13101a; /* 深紫灰底 */
-            border: 3px solid #2a2438;
-            padding: 20px;
+            background: #13101a;
+            border: 4px solid #2a2438;  /* 边框粗了一点 */
+            padding: 35px;          /* 原来 20px */
             box-shadow: 
-                0 0 60px rgba(80, 50, 120, 0.08),
-                inset 0 0 80px rgba(30, 20, 50, 0.3),
-                6px 6px 0 #0a0810,
-                -6px -6px 0 #0a0810;
+                0 0 80px rgba(80, 50, 120, 0.08),
+                inset 0 0 100px rgba(30, 20, 50, 0.3),
+                8px 8px 0 #0a0810,
+                -8px -8px 0 #0a0810;
             display: flex;
-            gap: 20px;
+            gap: 30px;             /* 原来 20px */
             flex-wrap: wrap;
             transform: rotate(-0.2deg);
             transition: all 0.3s ease;
@@ -49,10 +49,10 @@
 
         /* ========== 左侧栏 ========== */
         .sidebar {
-            flex: 1;
-            min-width: 200px;
+            flex: 1.2;             /* 原来 1，稍微宽一点 */
+            min-width: 240px;       /* 原来 200px */
             background: #100e17;
-            padding: 22px 18px;
+            padding: 30px 24px;     /* 原来 22px 18px */
             border: 2px solid #2a2438;
             box-shadow: 
                 inset 0 0 50px rgba(40, 30, 60, 0.2),
@@ -62,82 +62,84 @@
             position: relative;
         }
 
-        /* 左上角枯花装饰 */
         .sidebar::before {
             content: "🥀";
             position: absolute;
-            top: -12px;
-            left: -8px;
-            font-size: 22px;
+            top: -16px;
+            left: -12px;
+            font-size: 28px;
             opacity: 0.4;
             transform: rotate(-15deg);
         }
         .sidebar::after {
             content: "🥀";
             position: absolute;
-            bottom: -12px;
-            right: -8px;
-            font-size: 18px;
+            bottom: -16px;
+            right: -12px;
+            font-size: 24px;
             opacity: 0.3;
             transform: rotate(25deg);
         }
 
         /* ===== 头像 ===== */
         .avatar {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 15px;
-            border: 3px solid #3a2f4a;
+            width: 150px;           /* 原来 120px */
+            height: 150px;
+            margin: 0 auto 20px;    /* 原来 15px */
+            border: 4px solid #3a2f4a;  /* 边框粗一点 */
             background: #0d0b12;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 60px;
+            font-size: 80px;        /* 原来 60px */
             box-shadow: 
-                0 0 40px rgba(60, 40, 100, 0.1),
-                inset 0 0 50px rgba(30, 20, 50, 0.2);
+                0 0 50px rgba(60, 40, 100, 0.1),
+                inset 0 0 60px rgba(30, 20, 50, 0.2);
             image-rendering: pixelated;
             filter: grayscale(0.3);
             transition: all 0.5s ease;
         }
         .avatar:hover {
             filter: grayscale(0);
-            box-shadow: 0 0 60px rgba(80, 50, 130, 0.15);
+            box-shadow: 0 0 80px rgba(80, 50, 130, 0.15);
         }
 
+        /* ===== 文字稍微放大 ===== */
         .sidebar h2 {
-            font-size: 12px;
-            color: #6a5a7a;
-            text-shadow: 0 0 20px rgba(80, 50, 120, 0.1);
-            letter-spacing: 3px;
-            margin-top: 5px;
+            font-size: 15px;        /* 原来 12px */
+            color: #b0a0c0;
+            text-shadow: 0 0 30px rgba(120, 80, 180, 0.15);
+            letter-spacing: 4px;    /* 原来 3px */
+            margin-top: 8px;
             border-bottom: 2px solid #1a1622;
-            padding-bottom: 12px;
+            padding-bottom: 14px;
             word-break: break-word;
             font-weight: normal;
         }
 
         .sidebar p {
-            font-size: 9px;
-            color: #4a3a52;
-            line-height: 2.2;
-            margin-top: 12px;
+            font-size: 11px;        /* 原来 9px */
+            color: #9a8aaa;
+            line-height: 2.4;       /* 原来 2.2 */
+            margin-top: 16px;       /* 原来 12px */
             background: rgba(20, 16, 30, 0.6);
-            padding: 14px 12px;
+            padding: 18px 16px;     /* 原来 14px 12px */
             border: 1px solid #1a1622;
             letter-spacing: 0.5px;
         }
 
-        /* 丧系闪烁 */
+        .sidebar p span {
+            color: #b0a0c0;
+        }
+
         .blink {
             animation: blink 1.2s step-end infinite;
-            color: #6a4a7a;
+            color: #a080b0;
         }
         @keyframes blink {
             50% { opacity: 0.15; }
         }
 
-        /* 颓废抖动 */
         .tired {
             animation: tired 4s ease-in-out infinite;
         }
@@ -148,10 +150,10 @@
 
         /* ========== 右侧主内容 ========== */
         .main {
-            flex: 2;
-            min-width: 240px;
+            flex: 2.5;             /* 原来 2，稍微宽一点 */
+            min-width: 280px;       /* 原来 240px */
             background: #110f18;
-            padding: 25px 22px;
+            padding: 32px 28px;     /* 原来 25px 22px */
             border: 2px solid #2a2438;
             box-shadow: inset 0 0 60px rgba(30, 20, 50, 0.15);
             transform: rotate(-0.1deg);
@@ -159,38 +161,38 @@
         }
 
         .main h1 {
-            font-size: 14px;
-            color: #5a4a6a;
+            font-size: 17px;        /* 原来 14px */
+            color: #b0a0c0;
             text-align: center;
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: 5px;    /* 原来 4px */
             border-bottom: 2px solid #1a1622;
-            padding-bottom: 14px;
-            margin-bottom: 22px;
-            text-shadow: 0 0 30px rgba(60, 40, 100, 0.05);
+            padding-bottom: 18px;   /* 原来 14px */
+            margin-bottom: 28px;    /* 原来 22px */
+            text-shadow: 0 0 40px rgba(120, 80, 180, 0.08);
             word-break: break-word;
             font-weight: normal;
         }
 
-        /* ===== 丧系链接 ===== */
+        /* ===== 链接 ===== */
         .link-grid {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 18px;             /* 原来 14px */
         }
 
         .link-item {
             display: block;
             background: #12101a;
-            padding: 16px 20px;
+            padding: 22px 28px;     /* 原来 16px 20px */
             border: 2px solid #1f1a2a;
-            color: #5a4a62;
+            color: #b0a0b8;
             text-decoration: none;
-            font-size: 13px;
+            font-size: 16px;        /* 原来 13px */
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 4px;    /* 原来 3px */
             box-shadow: 
-                3px 3px 0 #0a0810,
+                4px 4px 0 #0a0810,  /* 原来 3px */
                 inset 0 0 30px rgba(30, 20, 50, 0.05);
             transition: all 0.15s ease;
             text-align: center;
@@ -198,7 +200,6 @@
             position: relative;
         }
 
-        /* 三个链接不同灰紫调 */
         .link-item:nth-child(1) { 
             background: #15101e; 
             border-color: #2a1f35;
@@ -212,32 +213,29 @@
             border-color: #2a2038;
         }
 
-        /* 悬停——更丧的反馈 */
         .link-item:hover {
             transform: translate(2px, 2px);
-            box-shadow: 0 0 40px rgba(60, 40, 100, 0.06);
+            box-shadow: 0 0 50px rgba(100, 70, 150, 0.1);
             background: #1a1622;
-            color: #7a6a8a;
-            border-color: #3a2f4a;
+            color: #d0c0e0;
+            border-color: #4a3a5a;
         }
 
-        /* 链接前符号 */
         .link-item::before {
             content: "✧ ";
-            font-size: 14px;
-            color: #2a2438;
-            margin-right: 10px;
-            opacity: 0.5;
+            font-size: 16px;        /* 原来 14px */
+            color: #4a3a5a;
+            margin-right: 12px;     /* 原来 10px */
+            opacity: 0.6;
         }
         .link-item::after {
             content: " ✧";
-            font-size: 14px;
-            color: #2a2438;
-            margin-left: 10px;
-            opacity: 0.5;
+            font-size: 16px;
+            color: #4a3a5a;
+            margin-left: 12px;
+            opacity: 0.6;
         }
 
-        /* 第二个链接特殊 */
         .link-item:nth-child(2)::before {
             content: "░ ";
         }
@@ -245,7 +243,6 @@
             content: " ░";
         }
 
-        /* 第三个链接特殊 */
         .link-item:nth-child(3)::before {
             content: "❍ ";
         }
@@ -256,38 +253,61 @@
         /* ========== 页脚 ========== */
         .footer {
             width: 100%;
-            margin-top: 16px;
+            margin-top: 22px;       /* 原来 16px */
             text-align: center;
-            font-size: 8px;
-            color: #2a2438;
+            font-size: 10px;        /* 原来 8px */
+            color: #5a4a6a;
             border-top: 2px solid #1a1622;
-            padding-top: 14px;
-            letter-spacing: 2px;
+            padding-top: 18px;      /* 原来 14px */
+            letter-spacing: 3px;    /* 原来 2px */
             transform: rotate(-0.2deg);
         }
 
         .footer .blink {
-            color: #4a3a52;
+            color: #8a7a9a;
+        }
+
+        /* 计数器 */
+        .sidebar div[style] {
+            color: #5a4a6a !important;
+            font-size: 9px !important;   /* 原来 7px */
+        }
+        .main div[style] {
+            color: #5a4a6a !important;
+            font-size: 9px !important;
+        }
+
+        /* 简介里的小字 */
+        .sidebar p[style] {
+            font-size: 10px !important;   /* 原来 8px */
+        }
+        .sidebar p[style] span {
+            font-size: 12px !important;   /* 原来 10px */
         }
 
         /* ========== 响应式 ========== */
         @media (max-width: 700px) {
             .container {
                 flex-direction: column;
-                padding: 14px;
+                padding: 18px;
             }
             .sidebar, .main {
                 transform: none;
             }
             .link-item {
-                font-size: 11px;
-                padding: 14px 12px;
+                font-size: 13px;
+                padding: 16px 14px;
             }
             .link-item::before, .link-item::after {
                 display: none;
             }
             .sidebar::before, .sidebar::after {
                 display: none;
+            }
+            .avatar {
+                width: 120px;
+                height: 120px;
+                font-size: 60px;
             }
         }
     </style>
@@ -304,14 +324,13 @@
             <span class="blink">✧</span> 活着 但没什么意思 <span class="blink">✧</span><br>
             专业发呆 业余呼吸<br>
             喜欢灰色、下雨天、凌晨三点<br>
-            <span style="color: #3a2f4a;">❍</span> 2000 - ？ <span style="color: #3a2f4a;">❍</span>
+            <span style="color: #8a7a9a;">❍</span> 2000 - ？ <span style="color: #8a7a9a;">❍</span>
         </p>
-        <p style="margin-top: 14px; font-size: 8px; background: #0d0b12; border: 1px solid #1a1622; color: #3a2f4a;">
+        <p style="margin-top: 16px; font-size: 10px; background: #0d0b12; border: 1px solid #1a1622; color: #7a6a8a;">
             🕸️  最 好 用<br>
-            <span style="font-size: 10px; color: #4a3a52;">Internet Explorer 5</span>
+            <span style="font-size: 12px; color: #9a8aaa;">Internet Explorer 5</span>
         </p>
-        <!-- 计数器 -->
-        <div style="margin-top: 14px; font-size: 7px; color: #1f1a2a; border-top: 1px solid #1a1622; padding-top: 10px; letter-spacing: 1px;">
+        <div style="margin-top: 16px; font-size: 9px; color: #4a3a5a; border-top: 1px solid #1a1622; padding-top: 12px; letter-spacing: 1px;">
             <span class="blink">✧</span> 访客: 0000000 <span class="blink">✧</span>
         </div>
     </div>
@@ -332,8 +351,7 @@
             </a>
         </div>
 
-        <!-- 颓废装饰 -->
-        <div style="text-align: right; margin-top: 20px; font-size: 7px; color: #1f1a2a; border-top: 1px solid #1a1622; padding-top: 10px; letter-spacing: 1px;">
+        <div style="text-align: right; margin-top: 24px; font-size: 9px; color: #4a3a5a; border-top: 1px solid #1a1622; padding-top: 12px; letter-spacing: 1px;">
             <span class="blink">░</span> 已存活: 9000+ 天 <span class="blink">░</span>
         </div>
     </div>
@@ -341,7 +359,7 @@
     <!-- ===== 页脚 ===== -->
     <div class="footer">
         <span class="blink">✧</span> 本 站 由 疲 惫 和 无 聊 驱 动  <span class="blink">✧</span><br>
-        <span style="font-size: 6px; color: #1a1622;">© 2026  Nothing Matters</span>
+        <span style="font-size: 8px; color: #3a2a4a;">© 2026  Nothing Matters</span>
     </div>
 
 </div>
