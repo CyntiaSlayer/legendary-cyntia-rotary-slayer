@@ -1,23 +1,14 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyntia Slayer</title>
+    <title>垃圾堆</title>
+    
+    <!-- 像素风格字体（Google Fonts） -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    
     <style>
-        /* ============ 全局配色 ============ */
-        :root {
-            --bg: #1a1a1a;
-            --bg-card: #242424;
-            --bg-hover: #2e2e2e;
-            --border: #3a3a3a;
-            --text: #e0e0e0;
-            --text-dim: #888;
-            --accent: #ffffff;
-            --radius: 14px;
-            --transition: 0.3s ease;
-        }
-
+        /* ========== 全局重置 & 古早噪点背景 ========== */
         * {
             margin: 0;
             padding: 0;
@@ -25,531 +16,246 @@
         }
 
         body {
-            font-family: "PingFang SC", "Microsoft YaHei", -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
+            background-color: #2d1b3d; /* 深紫黑底 */
+            font-family: 'Press Start 2P', monospace; /* 像素字体 */
             min-height: 100vh;
-        }
-
-        a {
-            color: var(--text);
-            text-decoration: none;
-        }
-
-        /* ============ 导航 ============ */
-        nav {
-            background: rgba(26, 26, 26, 0.92);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .nav-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 16px 20px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.2rem;
-            font-weight: 700;
-            letter-spacing: 4px;
-            color: var(--accent);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 5px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            padding: 7px 16px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            color: var(--text-dim);
-            transition: all var(--transition);
-            letter-spacing: 1px;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--accent);
-            background: var(--bg-card);
-        }
-
-        /* ============ 主容器 ============ */
-        main {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        /* ============ 主页 ============ */
-        #home .hero {
-            text-align: center;
-            padding: 60px 30px;
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            background: var(--bg-card);
-            margin-bottom: 40px;
-        }
-
-        .hero-avatar {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            background: #2a2a2a;
-            border: 2px solid #444;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            font-size: 40px;
-            margin: 0 auto 18px;
+            align-items: center;
+            padding: 20px;
+            /* ⚡ 古早噪点纹理（经典千禧年网站特效） */
+            background-image: 
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
         }
 
-        #home .hero h1 {
-            font-size: 2rem;
-            letter-spacing: 5px;
-            margin-bottom: 8px;
-        }
-
-        #home .hero .subtitle {
-            color: var(--text-dim);
-            letter-spacing: 3px;
-            font-size: 0.85rem;
-            margin-bottom: 18px;
-        }
-
-        #home .hero .divider {
-            width: 50px;
-            height: 1px;
-            background: #555;
-            margin: 0 auto 18px;
-        }
-
-        #home .hero .intro {
-            max-width: 400px;
-            margin: 0 auto 25px;
-            color: var(--text-dim);
-            font-size: 0.9rem;
-        }
-
-        .hero-btns {
+        /* ========== 主容器——像素粗边框 ========== */
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background-color: #f0e6d2; /* 旧纸色 */
+            border: 6px solid #4a2c2c;
+            padding: 20px;
+            box-shadow: 
+                12px 12px 0 #2d1b3d,
+                inset -4px -4px 0 #4a2c2c;
             display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .hero-btns a {
-            padding: 10px 24px;
-            border: 1px solid #444;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            transition: all var(--transition);
-        }
-
-        .hero-btns a:hover {
-            border-color: #fff;
-            background: #fff;
-            color: #1a1a1a;
-        }
-
-        /* ============ 分栏 ============ */
-        .two-columns {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
             gap: 20px;
+            flex-wrap: wrap;
+            /* 再叠一层轻微扭曲感 */
+            transform: rotate(0.3deg);
         }
 
-        @media (max-width: 768px) {
-            .two-columns {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .column {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .column h2 {
-            font-size: 1.1rem;
-            letter-spacing: 3px;
-            text-align: center;
-            margin-bottom: 20px;
-            color: var(--accent);
-        }
-
-        /* ============ 发布表单 ============ */
-        .publish-form {
-            margin-bottom: 20px;
-        }
-
-        .publish-form input,
-        .publish-form textarea {
-            width: 100%;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 12px 15px;
-            color: var(--text);
-            font-size: 0.88rem;
-            font-family: inherit;
-            transition: border-color var(--transition);
-            outline: none;
-            resize: vertical;
-        }
-
-        .publish-form input:focus,
-        .publish-form textarea:focus {
-            border-color: #666;
-        }
-
-        .publish-form input::placeholder,
-        .publish-form textarea::placeholder {
-            color: #555;
-        }
-
-        .publish-form input {
-            margin-bottom: 10px;
-        }
-
-        .publish-form textarea {
-            min-height: 80px;
-            margin-bottom: 10px;
-        }
-
-        .publish-btn {
-            width: 100%;
-            padding: 11px;
-            background: transparent;
-            border: 1px solid #555;
-            border-radius: 8px;
-            color: var(--text);
-            font-size: 0.85rem;
-            letter-spacing: 3px;
-            cursor: pointer;
-            transition: all var(--transition);
-        }
-
-        .publish-btn:hover {
-            background: #fff;
-            color: #1a1a1a;
-            border-color: #fff;
-        }
-
-        .publish-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-
-        /* ============ 内容列表 ============ */
-        .post-list {
+        /* ========== 左侧栏（头像 + 简介） ========== */
+        .sidebar {
             flex: 1;
-            overflow-y: auto;
-        }
-
-        .post-list:empty::after {
-            content: '还没有内容';
-            display: block;
+            min-width: 220px;
+            background: #c9b79b;
+            padding: 20px;
+            border: 4px solid #4a2c2c;
+            box-shadow: inset -4px -4px 0 #6b4f3a;
             text-align: center;
-            color: #555;
-            font-size: 0.8rem;
-            padding: 30px 0;
+            /* 让文字也带点歪斜 */
+            transform: rotate(-0.5deg);
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px;
+            border: 5px solid #4a2c2c;
+            /* 像素风头像框——用emoji或纯色块代替 */
+            background: #d94f4f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            image-rendering: pixelated;
+            box-shadow: 6px 6px 0 #2d1b3d;
+        }
+
+        .sidebar h2 {
+            font-size: 14px;
+            color: #2d1b3d;
+            text-shadow: 2px 2px 0 #b89b7a;
             letter-spacing: 1px;
+            margin-top: 10px;
+            border-bottom: 3px dotted #4a2c2c;
+            padding-bottom: 10px;
         }
 
-        .post-item {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 15px 18px;
-            margin-bottom: 10px;
-            transition: all var(--transition);
+        .sidebar p {
+            font-size: 10px;
+            color: #3d2b1f;
+            line-height: 1.8;
+            margin-top: 12px;
+            background: #dfd0b8;
+            padding: 12px;
+            border: 2px dashed #4a2c2c;
         }
 
-        .post-item:hover {
-            border-color: #555;
+        /* 古早小装饰——闪烁文字 */
+        .blink {
+            animation: blink 1s step-end infinite;
+            color: #b22222;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
         }
 
-        .post-item .post-title {
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: var(--accent);
+        /* ========== 右侧主内容（导航链接） ========== */
+        .main {
+            flex: 2;
+            min-width: 260px;
+            background: #e8dcc8;
+            padding: 25px;
+            border: 4px solid #4a2c2c;
+            box-shadow: inset -4px -4px 0 #6b4f3a;
+            transform: rotate(0.8deg);
         }
 
-        .post-item .post-date {
-            font-size: 0.7rem;
-            color: #555;
-            margin-bottom: 8px;
-        }
-
-        .post-item .post-body {
-            font-size: 0.82rem;
-            color: var(--text-dim);
-            white-space: pre-wrap;
+        .main h1 {
+            font-size: 16px;
+            color: #2d1b3d;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-bottom: 6px double #4a2c2c;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
             word-break: break-word;
         }
 
-        .loading-text {
-            text-align: center;
-            color: #555;
-            font-size: 0.8rem;
-            padding: 20px 0;
-            letter-spacing: 1px;
+        /* ===== 怪诞链接卡片 ===== */
+        .link-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
         }
 
-        /* ============ 页脚 ============ */
-        footer {
-            text-align: center;
-            padding: 35px 20px;
-            color: #555;
-            font-size: 0.78rem;
+        .link-item {
+            display: block;
+            background: #d4c3aa;
+            padding: 18px 22px;
+            border: 4px solid #4a2c2c;
+            color: #2d1b3d;
+            text-decoration: none;
+            font-size: 16px;
+            text-transform: uppercase;
             letter-spacing: 2px;
-            border-top: 1px solid var(--border);
-            margin-top: 50px;
+            box-shadow: 6px 6px 0 #2d1b3d;
+            transition: all 0.08s linear;
+            position: relative;
+            /* 每个链接不同颜色 —— 怪诞感 */
         }
 
-        footer a {
-            color: #888;
-            transition: color var(--transition);
+        /* 三个链接不同底色 */
+        .link-item:nth-child(1) { background: #e8b4b4; } /* 操蛋人生 */
+        .link-item:nth-child(2) { background: #b4c9a8; } /* 拉拉大便 */
+        .link-item:nth-child(3) { background: #c9b4d9; } /* 又喝多了 */
+
+        /* 鼠标悬停 —— 像素风位移抖动 */
+        .link-item:hover {
+            transform: translate(3px, 3px);
+            box-shadow: 2px 2px 0 #2d1b3d;
+            background: #f5e6c4;
         }
 
-        footer a:hover {
-            color: #fff;
+        /* 链接前面的小符号（古早装饰） */
+        .link-item::before {
+            content: "☞ ";
+            font-size: 22px;
+            color: #b22222;
+            margin-right: 10px;
         }
 
-        /* ============ 滚动条 ============ */
-        ::-webkit-scrollbar {
-            width: 6px;
+        /* ========== 页脚（可选） ========== */
+        .footer {
+            width: 100%;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 9px;
+            color: #6b4f3a;
+            border-top: 4px double #4a2c2c;
+            padding-top: 15px;
+            letter-spacing: 2px;
+            transform: rotate(-0.3deg);
         }
-        ::-webkit-scrollbar-track {
-            background: #1a1a1a;
+
+        .footer .blink {
+            color: #b22222;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #444;
-            border-radius: 3px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #666;
+
+        /* ========== 响应式：手机变小 ========== */
+        @media (max-width: 700px) {
+            .container {
+                flex-direction: column;
+                padding: 12px;
+            }
+            .sidebar {
+                transform: none;
+            }
+            .main {
+                transform: none;
+            }
+            .link-item {
+                font-size: 13px;
+                padding: 14px 16px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- ============ 导航 ============ -->
-    <nav>
-        <div class="nav-container">
-            <a href="#home" class="logo">CYN</a>
-            <ul class="nav-links">
-                <li><a href="#home" class="active">主页</a></li>
-                <li><a href="#chaos">又喝多了</a></li>
-                <li><a href="#works">拉拉大便</a></li>
-            </ul>
-        </div>
-    </nav>
+<div class="container">
 
-    <!-- ============ 主内容 ============ -->
-    <main>
+    <!-- ===== 左侧：头像 + 简介 ===== -->
+    <div class="sidebar">
+        <div class="avatar">👾</div>
+        <h2>✦ 废 柴 狗  ✦</h2>
+        <p>
+            <span class="blink">⬇</span> 互联网拾荒者<br>
+            专业摆烂 业余发疯<br>
+            喜欢像素、噪点、低保真<br>
+            <span style="font-size: 14px; color:#b22222;">⏣</span> 生于1999 死于酒桌 <span style="font-size: 14px; color:#b22222;">⏣</span>
+        </p>
+        <p style="margin-top: 15px; font-size: 9px; background: #c9b79b; border: 2px solid #4a2c2c;">
+            🕸️  best viewed with<br>
+            <span style="font-size: 14px;">Netscape 4.0</span>
+        </p>
+    </div>
 
-        <!-- ===== 主页 ===== -->
-        <section id="home">
-            <div class="hero">
-                <div class="hero-avatar">🖤</div>
-                <h1>CYN TIA</h1>
-                <p class="subtitle"> · SLAYER · </p>
-                <div class="divider"></div>
-                <p class="intro">
-                    今宵酒醒何处？杨柳岸、晓风残月。
-                </p>
-                <div class="hero-btns">
-                    <a href="#chaos">又喝多了 →</a>
-                    <a href="#works">拉拉大便 →</a>
-                    <a href="https://github.com/CyntiaSlayer" target="_blank">GitHub ↗</a>
-                </div>
-            </div>
-        </section>
+    <!-- ===== 右侧：链接大栏目 ===== -->
+    <div class="main">
+        <h1>⬛ 点 我 进 入 黑 暗 ⬛</h1>
 
-        <!-- ===== 分栏 ===== -->
-        <div class="two-columns">
-
-            <!-- 左栏：又喝多了 -->
-            <section id="chaos" class="column">
-                <h2>又喝多了</h2>
-
-                <div class="publish-form">
-                    <input type="text" id="chaos-title" placeholder="标题...">
-                    <textarea id="chaos-content" placeholder="写点什么..."></textarea>
-                    <button class="publish-btn" id="chaos-btn" onclick="publishPost('chaos')">发 布</button>
-                </div>
-
-                <div class="post-list" id="chaos-list"></div>
-            </section>
-
-            <!-- 右栏：拉拉大便 -->
-            <section id="works" class="column">
-                <h2>拉拉大便</h2>
-
-                <div class="publish-form">
-                    <input type="text" id="works-title" placeholder="作品名称...">
-                    <textarea id="works-content" placeholder="作品描述..."></textarea>
-                    <button class="publish-btn" id="works-btn" onclick="publishPost('works')">发 布</button>
-                </div>
-
-                <div class="post-list" id="works-list"></div>
-            </section>
-
+        <div class="link-grid">
+            <!-- 操蛋人生 -->
+            <a href="#" class="link-item" onclick="alert('🍻 人生就是操蛋 但还得继续干杯'); return false;">
+                操 蛋 人 生
+            </a>
+            <!-- 拉拉大便 -->
+            <a href="#" class="link-item" onclick="alert('💩 拉完又是一条好汉'); return false;">
+                拉 拉 大 便
+            </a>
+            <!-- 又喝多了 -->
+            <a href="#" class="link-item" onclick="alert('🥴 今朝有酒今朝醉 明天继续当废柴'); return false;">
+                又 喝 多 了
+            </a>
         </div>
 
-    </main>
+        <!-- 古早计数器装饰 -->
+        <div style="text-align: right; margin-top: 25px; font-size: 9px; color: #6b4f3a; border-top: 2px dotted #4a2c2c; padding-top: 12px;">
+            <span class="blink">✦</span> 访问量: 0000001 <span class="blink">✦</span>
+        </div>
+    </div>
 
-    <!-- ============ 页脚 ============ -->
-    <footer>
-        <p>© 2024 Cyntia Slayer · Powered by <a href="https://pages.github.com" target="_blank">GitHub Pages</a></p>
-    </footer>
+    <!-- ===== 页脚（可选） ===== -->
+    <div class="footer">
+        <span class="blink">⚡</span> 本 站 由 宿 醉 和 失 败 驱 动  <span class="blink">⚡</span><br>
+        <span style="font-size: 8px;">© 2026  Internet Garbage</span>
+    </div>
 
-    <!-- ============ JavaScript ============ -->
-    <script>
-        // ============================================
-        // ⚠️ 改这里：你的 GitHub 用户名和仓库名
-        // ============================================
-        const GITHUB_USERNAME = 'CyntiaSlayer';
-        const GITHUB_REPO = 'legendary-cyntia-rotary-slayer';
-        
-        // ============================================
-        // ⚠️ 改这里：你的 GitHub Token（从第1步获取）
-        // ============================================
-        const GITHUB_TOKEN = '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';
-
-        const API_BASE = `https://api.github.com/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/issues`;
-
-        // 发布内容
-        async function publishPost(section) {
-            const titleInput = document.getElementById(section + '-title');
-            const contentInput = document.getElementById(section + '-content');
-            const btn = document.getElementById(section + '-btn');
-            
-            const title = titleInput.value.trim();
-            const content = contentInput.value.trim();
-
-            if (!title || !content) {
-                alert('标题和内容都不能为空哦');
-                return;
-            }
-
-            btn.disabled = true;
-            btn.textContent = '发布中...';
-
-            try {
-                const response = await fetch(API_BASE, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `token ${GITHUB_TOKEN}`,
-                        'Accept': 'application/vnd.github.v3+json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        title: `[${section}] ${title}`,
-                        body: content,
-                        labels: [section]
-                    })
-                });
-
-                if (!response.ok) {
-                    const error = await response.json();
-                    throw new Error(error.message || '发布失败');
-                }
-
-                titleInput.value = '';
-                contentInput.value = '';
-                loadPosts(section);
-            } catch (error) {
-                console.error('发布失败:', error);
-                alert('发布失败：' + error.message);
-            } finally {
-                btn.disabled = false;
-                btn.textContent = '发 布';
-            }
-        }
-
-        // 加载内容
-        async function loadPosts(section) {
-            const listEl = document.getElementById(section + '-list');
-            listEl.innerHTML = '<div class="loading-text">加载中...</div>';
-
-            try {
-                const response = await fetch(
-                    `${API_BASE}?labels=${section}&state=open&per_page=50&sort=created&direction=desc`,
-                    {
-                        headers: {
-                            'Accept': 'application/vnd.github.v3+json'
-                        }
-                    }
-                );
-
-                if (!response.ok) {
-                    throw new Error('加载失败，状态码 ' + response.status);
-                }
-
-                const issues = await response.json();
-                listEl.innerHTML = '';
-
-                if (issues.length === 0) {
-                    return;
-                }
-
-                issues.forEach((issue) => {
-                    const item = document.createElement('div');
-                    item.className = 'post-item';
-                    
-                    const date = new Date(issue.created_at);
-                    const dateStr = date.getFullYear() + '.' + 
-                                   String(date.getMonth() + 1).padStart(2, '0') + '.' + 
-                                   String(date.getDate()).padStart(2, '0') + ' ' +
-                                   String(date.getHours()).padStart(2, '0') + ':' +
-                                   String(date.getMinutes()).padStart(2, '0');
-                    
-                    // 去掉标题里的 [section] 前缀
-                    const cleanTitle = issue.title.replace(/^\[.*?\]\s*/, '');
-                    
-                    item.innerHTML = `
-                        <div class="post-title">${escapeHtml(cleanTitle)}</div>
-                        <div class="post-date">${dateStr}</div>
-                        <div class="post-body">${escapeHtml(issue.body)}</div>
-                    `;
-                    listEl.appendChild(item);
-                });
-            } catch (error) {
-                console.error('加载失败:', error);
-                listEl.innerHTML = '<div class="loading-text">加载失败，请刷新重试</div>';
-            }
-        }
-
-        // 防 XSS
-        function escapeHtml(str) {
-            const div = document.createElement('div');
-            div.textContent = str;
-            return div.innerHTML;
-        }
-
-        // 初始化
-        loadPosts('chaos');
-        loadPosts('works');
-    </script>
+</div>
 
 </body>
 </html>
