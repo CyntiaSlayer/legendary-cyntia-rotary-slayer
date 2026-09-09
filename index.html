@@ -42,6 +42,7 @@
             gap: 40px;
             flex-wrap: wrap;
             transform: rotate(-0.2deg);
+            position: relative;
         }
 
         .sidebar {
@@ -296,6 +297,89 @@
                 display: none;
             }
         }
+
+        /* ===== 新 BGM 播放器 — 位于“已存活”下方 ===== */
+        .bgm-player {
+            margin-top: 20px;
+            padding: 18px 20px 16px 20px;
+            background: #0d0b12;
+            border: 2px solid #1f1a2a;
+            box-shadow: inset 0 0 30px rgba(20, 16, 30, 0.3);
+            text-align: center;
+            font-family: 'Press Start 2P', monospace;
+            transition: border-color 0.2s;
+        }
+        .bgm-player:hover {
+            border-color: #3a2f4a;
+        }
+        .bgm-player .player-label {
+            font-size: 16px;
+            color: #8a7a9a;
+            letter-spacing: 0px;
+            display: block;
+            margin-bottom: 14px;
+        }
+        .bgm-player .player-label .blink {
+            font-size: 14px;
+        }
+        .bgm-player .controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+        .bgm-player .controls button {
+            background: #13101a;
+            border: 2px solid #2a2438;
+            color: #b0a0c0;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 18px;
+            padding: 10px 18px;
+            box-shadow: 2px 2px 0 #0a0810;
+            transition: all 0.15s ease;
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='30' viewBox='0 0 24 30'%3E%3Ctext y='24' font-size='24' fill='%23808080'%3E✧%3C/text%3E%3C/svg%3E") 12 12, auto !important;
+            letter-spacing: 0px;
+            min-width: 60px;
+        }
+        .bgm-player .controls button:hover {
+            background: #1a1622;
+            border-color: #4a3a5a;
+            color: #d0c0e0;
+            transform: translate(1px, 1px);
+            box-shadow: 0 0 30px rgba(80, 50, 130, 0.1);
+        }
+        .bgm-player .controls button:active {
+            transform: translate(3px, 3px);
+            box-shadow: none;
+        }
+        .bgm-player .controls .track-info {
+            font-size: 14px;
+            color: #6a5a7a;
+            min-width: 120px;
+            text-align: center;
+            letter-spacing: 0px;
+            padding: 4px 0;
+            border-top: 1px solid #1a1622;
+            border-bottom: 1px solid #1a1622;
+        }
+        .bgm-player .controls .track-info span {
+            color: #9a8aaa;
+        }
+        @media (max-width: 700px) {
+            .bgm-player .controls {
+                gap: 12px;
+            }
+            .bgm-player .controls button {
+                font-size: 16px;
+                padding: 8px 14px;
+                min-width: 50px;
+            }
+            .bgm-player .controls .track-info {
+                min-width: 80px;
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -320,6 +404,19 @@
         </p>
         <div>
             <span class="blink">✧<span style="color: #5a4a6a;"> 访客: 0000000 <span class="blink">✧</span>
+        </div>
+        <!-- ===== 播放器放在这里：已存活下方 ===== -->
+        <div class="bgm-player">
+            <span class="player-label">
+                <span class="blink">♫</span> 垃圾堆 BGM <span class="blink">♫</span>
+            </span>
+            <div class="controls">
+                <button id="playPauseBtn">▶</button>
+                <button id="nextBtn">⏭</button>
+                <div class="track-info" id="trackInfo">
+                    <span id="trackName">曲目 1</span>
+                </div>
+            </div>
         </div>
     </div>
        <div class="main">
@@ -353,6 +450,100 @@
     </div>
 
 </div>   <!-- 关闭 .container -->
+
+<script>
+    (function() {
+        // ---------- 播放列表（请替换成你自己的音乐文件） ----------
+        const playlist = [
+            { name: '曲目 1', url: '' },
+            { name: '曲目 2', url: '' },
+            { name: '曲目 3', url: '' }
+        ];
+
+        // DOM 元素
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const trackNameSpan = document.getElementById('trackName');
+
+        // 音频对象
+        let audio = new Audio();
+        let currentIndex = 0;
+        let isPlaying = false;
+
+        // 加载歌曲
+        function loadTrack(index) {
+            if (index >= playlist.length) index = 0;
+            if (index < 0) index = playlist.length - 1;
+            currentIndex = index;
+            const track = playlist[currentIndex];
+            audio.src = track.url;
+            audio.load();
+            trackNameSpan.textContent = track.name;
+            // 如果正在播放状态，自动播放
+            if (isPlaying) {
+                audio.play().catch(e => {
+                    // 自动播放被阻止时，更新按钮状态
+                    isPlaying = false;
+                    playPauseBtn.textContent = '▶';
+                });
+            } else {
+                // 停止状态，按钮显示播放
+                playPauseBtn.textContent = '▶';
+            }
+        }
+
+        // 播放/暂停切换
+        function togglePlay() {
+            if (audio.src === '' || audio.paused) {
+                // 如果没有任何歌曲加载，加载第一首
+                if (audio.src === '') {
+                    loadTrack(0);
+                }
+                audio.play().then(() => {
+                    isPlaying = true;
+                    playPauseBtn.textContent = '⏸';
+                }).catch(err => {
+                    // 自动播放被阻止，保持暂停状态
+                    isPlaying = false;
+                    playPauseBtn.textContent = '▶';
+                    console.warn('播放被阻止:', err);
+                });
+            } else {
+                audio.pause();
+                isPlaying = false;
+                playPauseBtn.textContent = '▶';
+            }
+        }
+
+        // 下一首
+        function nextTrack() {
+            let nextIndex = (currentIndex + 1) % playlist.length;
+            loadTrack(nextIndex);
+            if (isPlaying) {
+                audio.play().catch(() => {});
+            }
+        }
+
+        // ----- 绑定事件 -----
+        playPauseBtn.addEventListener('click', togglePlay);
+
+        nextBtn.addEventListener('click', nextTrack);
+
+        // 歌曲播放结束时自动下一首
+        audio.addEventListener('ended', function() {
+            nextTrack();
+        });
+
+        // 手动加载第一首（预加载，但不自动播放）
+        loadTrack(0);
+        // 初始状态显示暂停图标，但实际未播放，按钮显示 ▶
+        isPlaying = false;
+        playPauseBtn.textContent = '▶';
+
+        // 可选：如果用户点击页面其他地方，尝试恢复自动播放策略 (某些浏览器需要用户手势)
+        // 但这里已经通过按钮点击触发，无需额外操作
+    })();
+</script>
 
 </body>
 </html>
